@@ -26,3 +26,5 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 end
+
+gem 'mini_racer', platforms: :ruby
