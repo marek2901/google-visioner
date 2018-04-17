@@ -3,16 +3,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class AddImageDialog extends React.Component {
-  state = {
-    open: true,
-  };
-
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
   handleClose = () => {
-    this.setState({open: false});
+    this.props.onClose();
   };
 
   handleSubmitImage = () => {
@@ -36,10 +28,10 @@ export default class AddImageDialog extends React.Component {
     ];
 
     return <Dialog
-      title="Dialog With Date Picker"
+      title="Add new photo !!"
       actions={actions}
       modal={false}
-      open={this.state.open}
+      open={true}
       onRequestClose={this.handleClose}>
     </Dialog>;
   }

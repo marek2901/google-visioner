@@ -4,6 +4,7 @@ import AppBar from 'material-ui/AppBar';
 
 import ItemsGrid from './ItemsGrid';
 import ItemPreview from './ItemPreview'
+import AddImageDialog from './AddImageDialog'
 
 import styled from 'styled-components';
 
@@ -14,16 +15,46 @@ import {AppWrapper, ItemsGridWrapper, PreviewWrapper} from '../widgets/grid-wrap
 
 import floatingBtnStyle from '../style-consts/FloatingBtnStyle';
 
-export default () => <MuiThemeProvider>
-  <AppBar
-    title="Awesome Google Visioner app"
-    iconStyleLeft={{display: 'none'}}
-    iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+class RootAppComponent extends React.Component {
+  state = {
+    dialog: false,
+    previewedItem: null
+  }
+
+  showDialog = () => {
+    this.setState({ dialog: true })
+  }
+
+  hideDialog = () => {
+    this.setState({ dialog: false })
+  }
+
+  handleTileClick = tile => {
+    this.setState({previewedItem: tile})
+  }
+
+  hidePreview = () => {
+    this.setState({previewedItem: null})
+  }
+
+  render = () => <div>
+    <AppBar
+      title="Awesome Google Visioner app"
+      iconStyleLeft={{display: 'none'}}
+      iconClassNameRight="muidocs-icon-navigation-expand-more"/>
     <AppWrapper>
-        <ItemsGridWrapper><ItemsGrid/></ItemsGridWrapper>
-        <PreviewWrapper><ItemPreview/></PreviewWrapper>
+      <ItemsGridWrapper><ItemsGrid onTileClick={this.handleTileClick}/></ItemsGridWrapper>
+      {this.state.previewedItem && <PreviewWrapper>
+        <ItemPreview onClose={this.hidePreview} itemData={this.state.previewedItem}/>
+      </PreviewWrapper>}
     </AppWrapper>
-    <FloatingActionButton style={floatingBtnStyle}>
+    <FloatingActionButton onClick={this.showDialog} style={floatingBtnStyle}>
       <ContentAdd />
     </FloatingActionButton>
+    {this.state.dialog && <AddImageDialog onClose={this.hideDialog} />}
+  </div>
+}
+
+export default () => <MuiThemeProvider>
+  <RootAppComponent />
 </MuiThemeProvider>
