@@ -3,12 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Widget management', type: :request do
-  context 'images' do
+  context 'GET images' do
     before(:each) do
+      10.times { FactoryBot.create(:vision_image) }
       get '/api/images'
     end
-    it 'returns list of images' do
-      expect(json[0]['image']).to eq 'xddd'
+
+    let(:data) { json['data'] }
+
+    it 'returns list of all images' do
+      expect(data.count).to eq 10
+    end
+
+    it 'returns list of all images' do
+      expect(
+        data[0]['attributes'].keys
+      ).to match_array(%w[visionProps title])
+    end
+  end
+
+  context 'POST image' do
+    it 'cretes new image' do
     end
   end
 end

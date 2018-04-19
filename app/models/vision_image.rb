@@ -1,0 +1,2 @@
+class VisionImage < ApplicationRecord
+end

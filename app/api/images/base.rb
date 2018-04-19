@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Images::Base < Grape::API
-  get '/' do
-    [{ image: 'xddd' }]
+  get '/', serializer: VisionImageSerializer do
+    VisionImage.all
   end
 end
