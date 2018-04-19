@@ -23,7 +23,17 @@ RSpec.describe 'Widget management', type: :request do
   end
 
   context 'POST image' do
+    let(:sample_params) do
+      {
+        file: fixture_file_upload('sample_image.png', 'image/png'),
+        title: 'sample title'
+      }
+    end
+
     it 'cretes new image' do
+      expect do
+        post('/api/images', params: sample_params)
+      end.to change { VisionImage.count }.by(1)
     end
   end
 end

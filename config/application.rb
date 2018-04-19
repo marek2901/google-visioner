@@ -16,6 +16,12 @@ require 'sprockets/railtie'
 
 Bundler.require(*Rails.groups)
 
+begin
+  Dotenv::Railtie.load
+rescue StandardError
+  puts 'Dotenv not loaded probably production environment'
+end
+
 module ImageVisioner
   class Application < Rails::Application
     config.load_defaults 5.2

@@ -13,6 +13,10 @@
 !/log/.keep
 !/tmp/.keep
 
+# Do not commit credentials
+/creds/*
+!/creds/.keep
+
 # Ignore uploaded files in development
 /storage/*
 
@@ -26,6 +30,9 @@
 /config/master.key
 /public/packs
 /public/packs-test
+/public/uploads
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+
+.env
