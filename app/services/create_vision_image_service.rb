@@ -12,7 +12,7 @@ class CreateVisionImageService
 
   def call
     image = VisionImage.create(title: title, file: file)
-    g_vision = Google::Cloud::Vision.new project_id: ENV['PROJECT_ID']
+    g_vision = Google::Cloud::Vision.new
     vis_image = g_vision.image image.file.path
   end
 end
