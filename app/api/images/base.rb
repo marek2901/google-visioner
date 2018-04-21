@@ -12,6 +12,9 @@ class Images::Base < Grape::API
     requires :file, type: File, desc: 'Image file (png)'
   end
   post '/' do
-    CreateVisionImageService.new(params).call
+    ApplyVisionFacesService.new(
+      CreateVisionImageService.new(params).call
+    ).call
+    { created: :ok }
   end
 end
