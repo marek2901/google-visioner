@@ -1,14 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-export default class AddImageDialog extends React.Component {
+class AddImageDialog extends React.Component {
   handleClose = () => {
     this.props.onClose();
   };
 
   handleSubmitImage = () => {
-    alert('Image sent');
+    this.props.onDialogSubmit()
     this.handleClose();
   }
 
@@ -36,3 +37,16 @@ export default class AddImageDialog extends React.Component {
     </Dialog>;
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDialogSubmit: () => {
+      console.log('TODO');
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddImageDialog)

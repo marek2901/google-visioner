@@ -1,4 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
+import {setPreviewImage} from '../actions/generators'
+
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
@@ -27,50 +31,9 @@ const styles = {
   },
 };
 
-const tilesData = [
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Breakfast',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Tasty burger',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Camera',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Morning',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Hats',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Honey',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Vegetables',
-    upladedAt: '20-01-2011',
-  },
-  {
-    img: 'https://picsum.photos/400/200',
-    title: 'Water plant',
-    upladedAt: '20-01-2011',
-  },
-];
+const ItemsGrid = props => {
+  const tilesData = props.tilesData.toJS()
 
-export default props => {
   if(!tilesData.length)
     return <MissingMessage>No items available</MissingMessage>
 
@@ -78,15 +41,41 @@ export default props => {
     <GridList
       cellHeight={180}
       style={styles.gridList}>
-      {tilesData.map((tile, index) => <GridTile
-        key={`${tile.img}${index}`}
-        title={tile.title}
-        actionIcon={<IconButton onClick={()=>{props.onTileClick(tile)}}>
-          <CallMade color="white" />
-        </IconButton>}
-        subtitle={<span>uploaded <b>{tile.upladedAt}</b></span>}>
-        <img src={tile.img} />
-      </GridTile>)}
+      {tilesData.map((tile, index) => {
+          const {
+            title,
+            createdAt,
+            file
+          } = tile.attributes
+
+          return <GridTile
+            key={`${title}${index}`}
+            title={title}
+            actionIcon={<IconButton onClick={()=>{props.showPreview(tile)}}>
+              <CallMade color="white" />
+            </IconButton>}
+            subtitle={<span>uploaded <b>{createdAt}</b></span>}>
+            <img src={file} />
+          </GridTile>
+        })
+      }
     </GridList>
   </div>
 }
+
+const mapStateToProps = (state) => {
+  return {
+    tilesData: state.images.get('dataArray')
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showPreview: (itemData) => { dispatch(setPreviewImage(itemData)) }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ItemsGrid)
