@@ -7,7 +7,8 @@ if Rails.env.production?
     config.fog_directory  = ENV['S3_BUCKET_NAME']
     config.fog_public     = true
     config.fog_attributes = { 'Cache-Control': 'max-age=315576000' }
-    config.asset_host = 'https://s3.amazonaws.com/website'
+    config.asset_host = 'https://s3-eu-west-1.amazonaws.com/google-visioner-images'
+    config.cache_dir = "#{Rails.root}/tmp/uploads"
 
     config.fog_credentials = {
       provider:               'AWS',
