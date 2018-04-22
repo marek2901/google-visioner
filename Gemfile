@@ -11,6 +11,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave'
 gem 'coffee-rails', '~> 4.2'
 gem 'fast_jsonapi'
+gem 'fog-aws'
 gem 'google-cloud-vision'
 gem 'grape'
 gem 'jbuilder', '~> 2.5'
