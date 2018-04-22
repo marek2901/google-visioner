@@ -17,4 +17,13 @@ class Images::Base < Grape::API
     ).call
     { created: :ok }
   end
+
+  desc 'Delete a Vision Image'
+  params do
+    requires :id, type: Integer, desc: 'Image to remove id'
+  end
+  delete ':id' do
+    VisionImage.find(params[:id]).destroy
+    { destroyed: :ok }
+  end
 end
