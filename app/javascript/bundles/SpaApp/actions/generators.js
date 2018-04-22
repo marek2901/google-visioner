@@ -5,7 +5,9 @@ import {
   SET_PREVIEW_IMAGE,
   NEW_IMAGE_REQUEST,
   NEW_IMAGE_REQUEST_SUCCESS,
-  NEW_IMAGE_REQUEST_FAILURE
+  NEW_IMAGE_REQUEST_FAILURE,
+  SHOW_DIALOG,
+  HIDE_DIALOG
 } from './types'
 
 export function triggerImagesRequest() {
@@ -51,5 +53,17 @@ export function addNewFileSuccess() {
 export function addNewFileFailure() {
   return {
     type: NEW_IMAGE_REQUEST_FAILURE
+  }
+}
+
+export function showDialog() {
+  return {
+    type: SHOW_DIALOG
+  }
+}
+
+export function hideDialog() {
+  return {
+    type: HIDE_DIALOG
   }
 }

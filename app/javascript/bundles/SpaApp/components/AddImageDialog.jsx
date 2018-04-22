@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field, Form, reduxForm } from 'redux-form'
-import { addNewFile } from '../actions/generators'
+import { addNewFile, hideDialog } from '../actions/generators'
 
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
@@ -18,14 +18,8 @@ class AddImageDialog extends React.Component {
     file: null
   }
 
-  onDrop = (files) => {
-    this.setState({
-      file: files[Math.max(files.length - 1, 0)]
-    });
-  }
-
   handleClose = () => {
-    this.props.onClose()
+    this.props.dispatch(hideDialog())
   };
 
   onFormSubmit = (data) => {

@@ -1,7 +1,10 @@
 import React from 'react';
-
 import {connect} from 'react-redux'
-import {triggerImagesRequest} from '../actions/generators'
+
+import {
+  triggerImagesRequest,
+  showDialog
+} from '../actions/generators'
 
 import AppBar from 'material-ui/AppBar';
 
@@ -9,30 +12,15 @@ import ItemsGrid from './ItemsGrid';
 import ItemPreview from './ItemPreview'
 import AddImageDialog from './AddImageDialog'
 
-import styled from 'styled-components';
-
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import floatingBtnStyle from '../style-consts/FloatingBtnStyle';
 
 import {AppWrapper, ItemsGridWrapper, PreviewWrapper} from '../widgets/grid-wrappers';
 
-import floatingBtnStyle from '../style-consts/FloatingBtnStyle';
-
 class RootAppComponent extends React.Component {
-  state = {
-    dialog: false
-  }
-
   componentDidMount() {
     this.props.loadData()
-  }
-
-  showDialog = () => {
-    this.setState({dialog: true})
-  }
-
-  hideDialog = () => {
-    this.setState({dialog: false})
   }
 
   render = () => <div>
@@ -46,22 +34,24 @@ class RootAppComponent extends React.Component {
         <ItemPreview />
       </PreviewWrapper>}
     </AppWrapper>
-    <FloatingActionButton onClick={this.showDialog} style={floatingBtnStyle}>
+    <FloatingActionButton onClick={this.props.showDialog} style={floatingBtnStyle}>
       <ContentAdd />
     </FloatingActionButton>
-    {this.state.dialog && <AddImageDialog onClose={this.hideDialog} />}
+    {this.props.dialogOpened && <AddImageDialog />}
   </div>
 }
 
 const mapStateToProps = (state) => {
   return {
-    previewedItem: state.images.get('previewedImage')
+    previewedItem: state.images.get('previewedImage'),
+    dialogOpened: state.ui.get('dialog')
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadData: () => { dispatch(triggerImagesRequest()) }
+    loadData: () => { dispatch(triggerImagesRequest()) },
+    showDialog: () => { dispatch(showDialog()) }
   }
 }
 
