@@ -2,18 +2,6 @@
 
 FactoryBot.define do
   factory :vision_image do
-    vision_props do
-      {
-        joyLikelihood: 'UNLIKELY',
-        sorrowLikelihood: 'VERY_UNLIKELY',
-        angerLikelihood: 'VERY_UNLIKELY',
-        surpriseLikelihood: 'VERY_UNLIKELY',
-        underExposedLikelihood: 'VERY_UNLIKELY',
-        blurredLikelihood: 'VERY_UNLIKELY',
-        headwearLikelihood: 'VERY_LIKELY'
-      }
-    end
-
     trait :with_file do
       file do
         File.new(Rails.root.join('spec', 'fixtures', 'sample_image.png'))
@@ -26,6 +14,10 @@ FactoryBot.define do
            { 'x' => 261, 'y' => 213 },
            { 'x' => 59, 'y' => 213 }]
         ]
+      end
+
+      labels do
+        ['eyewear', 'hair', 'facial hair', 'beard', 'sunglasses', 'moustache']
       end
     end
 

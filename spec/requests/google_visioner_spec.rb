@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Widget management', type: :request do
   context 'GET images' do
     before(:each) do
-      10.times { FactoryBot.create(:vision_image) }
+      10.times { FactoryBot.create(:vision_image, :with_file) }
       get '/api/images'
     end
 
@@ -18,7 +18,7 @@ RSpec.describe 'Widget management', type: :request do
     it 'returns list of all images' do
       expect(
         data[0]['attributes'].keys
-      ).to match_array(%w[visionProps title])
+      ).to match_array(%w[createdAt file labels title visionFile])
     end
   end
 

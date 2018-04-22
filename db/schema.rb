@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_163132) do
+ActiveRecord::Schema.define(version: 2018_04_22_095444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "vision_images", force: :cascade do |t|
-    t.jsonb "vision_props"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "file"
     t.jsonb "faces_array"
     t.string "vision_file"
+    t.string "labels", default: [], array: true
   end
 
 end

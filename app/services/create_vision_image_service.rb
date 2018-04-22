@@ -12,12 +12,21 @@ class CreateVisionImageService
     @title = params[:title]
   end
 
+  def map_labels(vis_image)
+    vis_image.labels.map(&:description)
+  end
+
+  def map_faces(vis_image)
+    vis_image.faces.map { |e| e.bounds.head.map(&:to_h) }
+  end
+
   def call
     VisionImage.new(title: title, file: file).tap do |image|
-      g_vision = Google::Cloud::Vision.new
-      vis_image = g_vision.image image.file.path
-      faces = vis_image.faces.map { |e| e.bounds.head.map(&:to_h) }
-      image.update_attribute(:faces_array, faces)
+      vis_image = Google::Cloud::Vision.new.image image.file.path
+      image.update_attributes(
+        faces_array: map_faces(vis_image),
+        labels: map_labels(vis_image)
+      )
     end.tap(&:save)
   end
 end
