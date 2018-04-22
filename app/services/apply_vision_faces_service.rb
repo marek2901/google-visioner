@@ -16,8 +16,16 @@ class ApplyVisionFacesService
     end.flatten
   end
 
+  def file_path_or_url
+    if Rails.env.production?
+      image_model.file.url
+    else
+      image_model.file.path
+    end
+  end
+
   def call
-    magick_img = MiniMagick::Image.open(image_model.file.path)
+    magick_img = MiniMagick::Image.open(file_path_or_url)
     magick_img.combine_options do |c|
       # line x0,y0 x1,y1 ## 0 start line 1 end line
       c.fill 'green'
