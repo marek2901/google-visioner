@@ -8,7 +8,8 @@ import { NEW_IMAGE_REQUEST } from '../actions/types'
 
 import {
   addNewFileSuccess,
-  addNewFileFailure
+  addNewFileFailure,
+  triggerImagesRequest
 } from '../actions/generators'
 
 function* newImageRequest(action) {
@@ -21,8 +22,8 @@ function* newImageRequest(action) {
       method : 'POST',
       body : data
     })
-    console.log(response.body);
     yield put(addNewFileSuccess());
+    yield put(triggerImagesRequest());
   } catch (e) {
     console.error(e);
     yield put(addNewFileFailure());

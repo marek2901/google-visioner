@@ -7,7 +7,10 @@ import {
   NEW_IMAGE_REQUEST_SUCCESS,
   NEW_IMAGE_REQUEST_FAILURE,
   SHOW_DIALOG,
-  HIDE_DIALOG
+  HIDE_DIALOG,
+  DELETE_IMAGE_REQUEST,
+  DELETE_IMAGE_REQUEST_SUCCESS,
+  DELETE_IMAGE_REQUEST_FAILURE
 } from './types'
 
 export function triggerImagesRequest() {
@@ -65,5 +68,24 @@ export function showDialog() {
 export function hideDialog() {
   return {
     type: HIDE_DIALOG
+  }
+}
+
+export function triggerDeleteImageRequest(imageId) {
+  return {
+    type: DELETE_IMAGE_REQUEST,
+    imageId
+  }
+}
+
+export function deleteImageRequestSuccess() {
+  return {
+    type: DELETE_IMAGE_REQUEST_SUCCESS
+  }
+}
+
+export function deleteImageRequestFailure() {
+  return {
+    type: DELETE_IMAGE_REQUEST_FAILURE
   }
 }

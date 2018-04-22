@@ -3,6 +3,7 @@ const { fromJS, List } = require('immutable')
 import {
   REQUEST_IMAGES_DATA_SUCCESS,
   REQUEST_IMAGES_DATA_FAILURE,
+  DELETE_IMAGE_REQUEST_SUCCESS,
   SET_PREVIEW_IMAGE
 } from '../actions/types'
 
@@ -17,6 +18,8 @@ function imagesAppReducer(state = initialState, action) {
       return state.set('dataArray', List(action.data.imgs));
     case SET_PREVIEW_IMAGE:
       return state.set('previewedImage', fromJS(action.imageData))
+    case DELETE_IMAGE_REQUEST_SUCCESS:
+      return state.set('previewedImage', null)
     default:
       return state;
   }

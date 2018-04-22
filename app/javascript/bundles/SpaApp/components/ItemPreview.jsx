@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { setPreviewImage } from '../actions/generators'
+import {
+  setPreviewImage,
+  triggerDeleteImageRequest
+} from '../actions/generators'
 
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -17,6 +20,8 @@ const ItemPreview = props => {
     file,
     visionFile
   } = imageData
+
+  const imageId = props.image.get('id')
 
   return <Card>
     <CardHeader
@@ -40,7 +45,10 @@ const ItemPreview = props => {
       <img src={visionFile} alt="" />
     </CardMedia>
     <CardActions>
-      <FlatButton secondary={true} label="Delete" />
+      <FlatButton
+        secondary={true}
+        onClick={() => { props.onDelete(imageId) }}
+        label="Delete" />
     </CardActions>
   </Card>
 }
@@ -53,7 +61,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClose: ()=>{ dispatch(setPreviewImage(null)) }
+    onClose: ()=>{ dispatch(setPreviewImage(null)) },
+    onDelete: (imageId)=>{ dispatch(triggerDeleteImageRequest(imageId)) }
   }
 }
 
