@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const AppWrapper = styled.div`
   display: inline-flex;
   width: 100%;
-  padding-top: 64px;
+  margin-top: 64px;
+  position: relative;
 `
 
 export const ItemsGridWrapper = styled.div`
@@ -23,6 +24,7 @@ export const PreviewWrapper = styled.div`
   width: 70%;
   position: fixed;
   right: 0;
+  top: 0;
   height: 100%;
   overflow: scroll;
 `
