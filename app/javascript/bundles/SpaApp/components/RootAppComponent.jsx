@@ -16,7 +16,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import floatingBtnStyle from '../style-consts/FloatingBtnStyle';
 
-import {AppWrapper, ItemsGridWrapper, PreviewWrapper} from '../widgets/grid-wrappers';
+import {AppWrapper, ItemsGridWrapper, PreviewWrapper, EmptyPreview} from '../widgets/grid-wrappers';
 
 class RootAppComponent extends React.Component {
   componentDidMount() {
@@ -30,9 +30,9 @@ class RootAppComponent extends React.Component {
       iconClassNameRight="muidocs-icon-navigation-expand-more"/>
     <AppWrapper>
       <ItemsGridWrapper><ItemsGrid/></ItemsGridWrapper>
-      {this.props.previewedItem && <PreviewWrapper>
-        <ItemPreview />
-      </PreviewWrapper>}
+      <PreviewWrapper>
+        {this.props.previewedItem ? <ItemPreview /> : <EmptyPreview>Click on tile to preview</EmptyPreview>}
+      </PreviewWrapper>
     </AppWrapper>
     <FloatingActionButton onClick={this.props.showDialog} style={floatingBtnStyle}>
       <ContentAdd />
