@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const AppWrapper = styled.div`
   display: inline-flex;
   width: 100%;
-  margin-top: 64px;
+  top: 64px;
   position: relative;
 `
 
@@ -24,7 +24,7 @@ export const PreviewWrapper = styled.div`
   width: 70%;
   position: fixed;
   right: 0;
-  top: 0;
-  height: 100%;
+  top: 64px;
+  height: calc(100% - 64px);
   overflow: scroll;
 `
