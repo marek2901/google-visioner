@@ -27,6 +27,7 @@ class RootAppComponent extends React.Component {
     <AppBar
       title="Awesome Google Visioner app"
       iconStyleLeft={{display: 'none'}}
+      style={{ position: "fixed", top: 0 }}
       iconClassNameRight="muidocs-icon-navigation-expand-more"/>
     <AppWrapper>
       <ItemsGridWrapper><ItemsGrid/></ItemsGridWrapper>
