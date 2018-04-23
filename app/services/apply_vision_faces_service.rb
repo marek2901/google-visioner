@@ -28,8 +28,8 @@ class ApplyVisionFacesService
     magick_img = MiniMagick::Image.open(file_path_or_url)
     magick_img.combine_options do |c|
       # line x0,y0 x1,y1 ## 0 start line 1 end line
-      c.fill 'green'
-      c.strokewidth '3'
+      c.fill 'rgb(0, 255, 0)'
+      c.linewidth '10'
       lines.map do |line|
         c.draw "line #{line}"
       end
