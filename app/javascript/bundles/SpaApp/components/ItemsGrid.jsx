@@ -5,7 +5,6 @@ import {setPreviewImage} from '../actions/generators'
 
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
 import CallMade from 'material-ui/svg-icons/communication/call-made';
 
 import styled from 'styled-components';

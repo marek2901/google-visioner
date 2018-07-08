@@ -1,8 +1,7 @@
-const { fromJS, List } = require('immutable')
+import { fromJS, List } from 'immutable'
 
 import {
   REQUEST_IMAGES_DATA_SUCCESS,
-  REQUEST_IMAGES_DATA_FAILURE,
   DELETE_IMAGE_REQUEST_SUCCESS,
   SET_PREVIEW_IMAGE
 } from '../actions/types'

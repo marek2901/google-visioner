@@ -15,7 +15,7 @@ import {
 function* deleteImage(action) {
   try {
     const { imageId } = action
-    const response = yield call(fetch, `/api/images/${imageId}`, {
+    yield call(fetch, `/api/images/${imageId}`, {
       method : 'DELETE'
     })
     yield put(deleteImageRequestSuccess());

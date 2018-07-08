@@ -18,7 +18,7 @@ function* newImageRequest(action) {
     let data = new FormData();
     data.append('title', title)
     data.append('file', file)
-    const response = yield call(fetch, '/api/images', {
+    yield call(fetch, '/api/images', {
       method : 'POST',
       body : data
     })
